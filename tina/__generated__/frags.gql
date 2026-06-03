@@ -1,0 +1,109 @@
+fragment HomepageParts on Homepage {
+  __typename
+  hero {
+    __typename
+    eyebrow
+    title
+    subtitle
+    ctaLabel
+    ctaUrl
+    waUrl
+    tgUrl
+  }
+  about {
+    __typename
+    sectionLabel
+    body
+    stats {
+      __typename
+      value
+      label
+    }
+  }
+  portfolio {
+    __typename
+    sectionLabel
+    heading
+    items {
+      __typename
+      title
+      area
+      style
+      image
+    }
+  }
+  process {
+    __typename
+    heading
+    steps {
+      __typename
+      num
+      title
+      desc
+    }
+    extrasHeading
+    extras {
+      __typename
+      title
+      desc
+    }
+  }
+  prices {
+    __typename
+    heading
+    note
+    ctaLabel
+    ctaUrl
+    items {
+      __typename
+      title
+      price
+      unit
+      featured
+    }
+  }
+  contacts {
+    __typename
+    name
+    phone
+    email
+    address
+    waUrl
+    tgUrl
+    waCtaText
+    tgCtaText
+  }
+  seo {
+    __typename
+    title
+    description
+    keywords
+    ogImage
+  }
+}
+
+fragment PartnersParts on Partners {
+  __typename
+  heading
+  items {
+    __typename
+    name
+    logo
+    url
+  }
+}
+
+fragment SettingsParts on Settings {
+  __typename
+  siteName
+  siteTagline
+  footerCopyright
+  nav {
+    __typename
+    label
+    href
+  }
+  whatsappNumber
+  whatsappMessage
+  telegramHandle
+}
