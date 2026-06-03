@@ -3,6 +3,7 @@ import { defineConfig } from "tinacms";
 export default defineConfig({
   clientId: process.env.TINA_CLIENT_ID || undefined,
   token: process.env.TINA_TOKEN || undefined,
+  branch: process.env.TINA_BRANCH || "master",
 
   build: {
     outputFolder: "admin",
