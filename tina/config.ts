@@ -1,9 +1,8 @@
 import { defineConfig } from "tinacms";
 
 export default defineConfig({
-  // Локальный режим — без Tina Cloud
-  clientId: undefined,
-  token: undefined,
+  clientId: process.env.TINA_CLIENT_ID || undefined,
+  token: process.env.TINA_TOKEN || undefined,
 
   build: {
     outputFolder: "admin",
