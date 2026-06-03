@@ -1,0 +1,14 @@
+{
+  "siteName": "Светлана Рыбакова",
+  "siteTagline": "Дизайнер интерьеров",
+  "footerCopyright": "© 2025 Светлана Рыбакова — Дизайнер интерьеров",
+  "nav": [
+    { "label": "Обо мне",   "href": "/#about"     },
+    { "label": "Портфолио", "href": "/#portfolio" },
+    { "label": "Услуги",    "href": "/#services"  },
+    { "label": "Контакты",  "href": "/#contacts"  }
+  ],
+  "whatsappNumber": "79164953751",
+  "whatsappMessage": "Здравствуйте! Хочу заказать дизайн-проект.",
+  "telegramHandle": "rybakovasi"
+}

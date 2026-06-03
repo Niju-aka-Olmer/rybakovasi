@@ -1,0 +1,91 @@
+---
+// src/components/Contacts.astro
+interface Props { data: any; settings: any }
+const { data: c, settings: s } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<section class="section contacts-section" id="contacts">
+  <div class="container contacts-inner">
+
+    <div class="c-left">
+      <span class="eyebrow reveal">Контакты</span>
+      <h2 class="c-heading reveal">ДЛЯ СВЯЗИ СО МНОЙ</h2>
+      <p class="c-name reveal">{c.name}</p>
+      <p class="reveal"><span class="c-label">Телефон:</span> <a href={`tel:${c.phone.replace(/\s/g,'')}`}>{c.phone}</a></p>
+      <p class="reveal"><span class="c-label">Email:</span> <a href={`mailto:${c.email}`}>{c.email}</a></p>
+      <p class="c-address reveal">{c.address}</p>
+      <a class="c-privacy reveal" href="/privacy">Политика конфиденциальности</a>
+    </div>
+
+    <div class="c-right">
+      <div class="c-btns reveal">
+        {c.waUrl && (
+          <a class="btn btn-gold" href={c.waUrl} target="_blank" rel="noopener">
+            {c.waCtaText || 'WhatsApp'}
+          </a>
+        )}
+        {c.tgUrl && (
+          <a class="btn btn-outline" href={c.tgUrl} target="_blank" rel="noopener">
+            {c.tgCtaText || 'Telegram'}
+          </a>
+        )}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="f-brand">
+      <span class="f-name">{s.siteName}</span>
+      <span class="f-tag">{s.siteTagline}</span>
+    </div>
+    <nav class="f-nav" aria-label="Footer">
+      {s.nav.map((item: any) => <a href={item.href}>{item.label}</a>)}
+      <a href="/privacy">Конфиденциальность</a>
+    </nav>
+    <p class="f-copy">{s.footerCopyright || `© ${year} ${s.siteName}`}</p>
+  </div>
+</footer>
+
+<style>
+  .contacts-section { background:var(--bg); }
+  .contacts-inner {
+    display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start;
+  }
+  .c-heading {
+    font-family:var(--ff-display); font-weight:300;
+    font-size:clamp(1.8rem,4vw,2.8rem); letter-spacing:.05em;
+    margin-bottom:1.8rem; color:var(--dark);
+  }
+  .c-name { font-weight:500; margin-bottom:.8rem; }
+  .c-left p  { color:var(--mid); margin-bottom:.5rem; }
+  .c-left a  { color:var(--accent); transition:opacity .25s; }
+  .c-left a:hover { opacity:.7; }
+  .c-label { font-weight:500; color:var(--dark); }
+  .c-address { font-size:.95rem; color:var(--muted); margin-top:.5rem; }
+  .c-privacy { display:block; margin-top:1.5rem; font-size:.8rem; color:var(--muted); text-decoration:underline; text-decoration-color:transparent; transition:text-decoration-color .25s; }
+  .c-privacy:hover { text-decoration-color:var(--muted); }
+
+  .c-right { display:flex; align-items:flex-start; padding-top:3rem; }
+  .c-btns { display:flex; flex-wrap:wrap; gap:1rem; }
+
+  /* FOOTER */
+  .site-footer { background:var(--dark); color:rgba(255,255,255,.3); padding-block:2.5rem; }
+  .footer-inner {
+    display:grid; grid-template-columns:1fr auto auto;
+    align-items:center; gap:2rem;
+  }
+  .f-brand { display:flex; flex-direction:column; gap:3px; }
+  .f-name  { font-family:var(--ff-display); font-size:1rem; font-weight:400; color:rgba(255,255,255,.6); letter-spacing:.06em; }
+  .f-tag   { font-size:.62rem; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,255,255,.25); }
+  .f-nav   { display:flex; gap:1.8rem; flex-wrap:wrap; }
+  .f-nav a { font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.3); transition:color .25s; }
+  .f-nav a:hover { color:var(--accent); }
+  .f-copy  { font-size:.72rem; white-space:nowrap; }
+
+  @media(max-width:900px) { .contacts-inner { grid-template-columns:1fr; gap:2.5rem; } .c-right { padding-top:0; } }
+  @media(max-width:700px) { .footer-inner { grid-template-columns:1fr; gap:1.5rem; } .f-nav { gap:1rem; } }
+</style>

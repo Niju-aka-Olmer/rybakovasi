@@ -1,0 +1,132 @@
+---
+// src/components/Services.astro
+interface Props { process: any; prices: any }
+const { process: pr, prices: pc } = Astro.props;
+---
+
+<!-- PROCESS -->
+<section class="section process-section" id="process">
+  <div class="container">
+    <h2 class="section-heading reveal">{pr.heading}</h2>
+
+    <ol class="steps-grid" role="list">
+      {pr.steps.map((s: any) => (
+        <li class="step reveal">
+          <span class="step-num">{s.num}</span>
+          <div>
+            <h3>{s.title}</h3>
+            <p>{s.desc}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+
+    {pr.extras?.length > 0 && (
+      <>
+        <h2 class="section-heading extras-heading reveal">{pr.extrasHeading}</h2>
+        <ol class="steps-grid extras-grid" role="list">
+          {pr.extras.map((e: any) => (
+            <li class="step reveal">
+              <span class="step-num">+</span>
+              <div>
+                <h3>{e.title}</h3>
+                <p>{e.desc}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </>
+    )}
+  </div>
+</section>
+
+<!-- PRICES -->
+<section class="section prices-section" id="services">
+  <div class="container">
+    <h2 class="section-heading reveal" style="color:var(--white)">{pc.heading}</h2>
+
+    <div class="prices-grid">
+      {pc.items.map((item: any) => (
+        <div class={`price-card reveal${item.featured ? ' featured' : ''}`}>
+          <h3>{item.title}</h3>
+          <div class="price-row">
+            <span class="price-val">{item.price}</span>
+            <span class="price-unit">{item.unit}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="prices-footer reveal">
+      {pc.note && <p class="prices-note">{pc.note}</p>}
+      {pc.ctaUrl && (
+        <a class="btn btn-gold" href={pc.ctaUrl} target="_blank" rel="noopener">{pc.ctaLabel}</a>
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* --- PROCESS --- */
+  .process-section { background:var(--surface); }
+  .steps-grid {
+    list-style:none;
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+    border:1px solid rgba(26,21,15,.1);
+  }
+  .step {
+    display:flex; gap:1.4rem; padding:2rem 1.8rem;
+    border-right:1px solid rgba(26,21,15,.08);
+    border-bottom:1px solid rgba(26,21,15,.08);
+    transition:background var(--dur) ease;
+  }
+  .step:hover { background:var(--bg); }
+  .step-num {
+    font-family:var(--ff-display); font-size:2.2rem; font-weight:300;
+    color:var(--accent-lt); line-height:1; flex-shrink:0; padding-top:2px;
+  }
+  .step h3 { font-family:var(--ff-display); font-weight:400; font-size:1.05rem; margin-bottom:.4rem; }
+  .step p  { font-size:.88rem; color:var(--muted); line-height:1.65; }
+
+  .extras-heading { margin-top:4rem; }
+  .extras-grid { grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); }
+
+  /* --- PRICES --- */
+  .prices-section { background:var(--dark); overflow:hidden; position:relative; }
+  .prices-section::before {
+    content:'Design';
+    position:absolute; right:-1rem; top:50%; transform:translateY(-50%);
+    font-family:var(--ff-display); font-size:22vw; font-weight:300;
+    color:rgba(255,255,255,.02); pointer-events:none; white-space:nowrap;
+  }
+
+  .prices-grid {
+    display:grid; grid-template-columns:repeat(3,1fr);
+    gap:1px; background:rgba(255,255,255,.06); margin-bottom:3rem;
+  }
+  .price-card {
+    background:var(--dark); padding:2.2rem 2rem;
+    transition:background var(--dur) ease;
+  }
+  .price-card:hover { background:#221f18; }
+  .price-card.featured { background:#1e1b13; border-top:2px solid var(--accent); }
+  .price-card h3 {
+    font-family:var(--ff-display); font-weight:300; font-size:1rem;
+    color:rgba(255,255,255,.6); letter-spacing:.04em; line-height:1.45; margin-bottom:1.2rem;
+  }
+  .price-row { display:flex; align-items:baseline; gap:.4rem; }
+  .price-val  { font-family:var(--ff-display); font-size:2.2rem; font-weight:300; color:var(--accent); line-height:1; }
+  .price-unit { font-size:.8rem; color:rgba(255,255,255,.3); letter-spacing:.06em; }
+
+  .prices-footer {
+    text-align:center; display:flex; flex-direction:column; align-items:center; gap:1.5rem;
+  }
+  .prices-note { font-size:.88rem; color:rgba(255,255,255,.35); letter-spacing:.06em; }
+
+  @media(max-width:900px) { .prices-grid { grid-template-columns:repeat(2,1fr); } }
+  @media(max-width:560px) {
+    .prices-grid { grid-template-columns:1fr; }
+    .steps-grid  { grid-template-columns:1fr; }
+  }
+</style>

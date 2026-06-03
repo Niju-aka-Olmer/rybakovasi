@@ -1,0 +1,11 @@
+{
+  "heading": "МОИ ПАРТНЕРЫ",
+  "items": [
+    { "name": "Русская Почта", "logo": "/images/partners/russian-post.png", "url": "" },
+    { "name": "Wildberries",   "logo": "/images/partners/wb.jpg",           "url": "" },
+    { "name": "Партнёр 3",    "logo": "/images/partners/partner3.jpg",     "url": "" },
+    { "name": "Dekomo",        "logo": "/images/partners/dekomo.jpg",       "url": "" },
+    { "name": "Партнёр 5",    "logo": "/images/partners/partner5.png",     "url": "" },
+    { "name": "Партнёр 6",    "logo": "/images/partners/partner6.png",     "url": "" }
+  ]
+}

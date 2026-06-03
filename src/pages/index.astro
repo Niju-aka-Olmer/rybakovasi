@@ -1,0 +1,32 @@
+---
+import BaseLayout  from '../layouts/BaseLayout.astro';
+import Header      from '../components/Header.astro';
+import Hero        from '../components/Hero.astro';
+import About       from '../components/About.astro';
+import Portfolio   from '../components/Portfolio.astro';
+import Services    from '../components/Services.astro';
+import Partners    from '../components/Partners.astro';
+import Contacts    from '../components/Contacts.astro';
+import { getHomepage, getSettings, getPartners } from '../lib/content';
+
+const page     = getHomepage();
+const settings = getSettings();
+const partners = getPartners();
+---
+
+<BaseLayout
+  title={page.seo?.title}
+  description={page.seo?.description}
+  keywords={page.seo?.keywords}
+  ogImage={page.seo?.ogImage}
+>
+  <Header />
+  <main>
+    <Hero      data={page.hero} />
+    <About     data={page.about} />
+    <Portfolio data={page.portfolio} />
+    <Services  process={page.process} prices={page.prices} />
+    <Partners  data={partners} />
+    <Contacts  data={page.contacts} settings={settings} />
+  </main>
+</BaseLayout>

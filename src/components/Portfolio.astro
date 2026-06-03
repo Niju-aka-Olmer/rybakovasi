@@ -1,0 +1,77 @@
+---
+// src/components/Portfolio.astro
+interface Props { data: any }
+const { data: p } = Astro.props;
+---
+
+<section class="section portfolio-section" id="portfolio">
+  <div class="container">
+    <span class="eyebrow reveal">{p.sectionLabel}</span>
+    <h2 class="section-heading reveal">{p.heading}</h2>
+
+    <div class="portfolio-grid">
+      {p.items.map((item: any, i: number) => (
+        <article class={`p-card reveal ${i === 0 ? 'card-wide' : ''}`}>
+          <div class="card-img">
+            {item.image
+              ? <img src={item.image} alt={item.title} loading="lazy" decoding="async" />
+              : <div class="card-placeholder"></div>
+            }
+            <div class="card-overlay">
+              {item.style && <span class="card-style">{item.style}</span>}
+            </div>
+          </div>
+          <div class="card-meta">
+            <h3>{item.title}</h3>
+            {item.area && <span class="card-area">{item.area}</span>}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .portfolio-section { background:var(--bg); }
+  .portfolio-grid {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1.5rem;
+  }
+  .card-wide { grid-column:span 2; }
+  .p-card { display:flex; flex-direction:column; gap:1rem; }
+
+  .card-img { position:relative; overflow:hidden; }
+  .card-wide .card-img { aspect-ratio:16/9; }
+  .p-card:not(.card-wide) .card-img { aspect-ratio:4/3; }
+  .card-img img { width:100%; height:100%; object-fit:cover; transition:transform .6s ease; }
+  .p-card:hover img { transform:scale(1.04); }
+
+  .card-placeholder {
+    width:100%; height:100%;
+    position:absolute; inset:0;
+    background:linear-gradient(135deg,#e8e3da,#cbc3b5);
+  }
+
+  .card-overlay {
+    position:absolute; inset:0;
+    background:linear-gradient(to top,rgba(24,21,15,.45),transparent 50%);
+    display:flex; align-items:flex-end; padding:1.2rem;
+    opacity:0; transition:opacity .3s ease;
+  }
+  .p-card:hover .card-overlay { opacity:1; }
+  .card-style {
+    font-size:.7rem; letter-spacing:.2em; text-transform:uppercase;
+    color:rgba(255,255,255,.85); border:1px solid rgba(255,255,255,.3); padding:.3rem .8rem;
+  }
+
+  .card-meta { display:flex; justify-content:space-between; align-items:baseline; gap:1rem; }
+  .card-meta h3 { font-family:var(--ff-display); font-weight:400; font-size:1.1rem; letter-spacing:.02em; }
+  .card-area { font-size:.75rem; color:var(--muted); white-space:nowrap; }
+
+  @media(max-width:900px) { .portfolio-grid { grid-template-columns:repeat(2,1fr); } }
+  @media(max-width:560px) {
+    .portfolio-grid { grid-template-columns:1fr; }
+    .card-wide { grid-column:span 1; }
+  }
+</style>

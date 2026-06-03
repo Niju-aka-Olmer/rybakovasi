@@ -1,0 +1,83 @@
+---
+// src/layouts/BaseLayout.astro
+interface Props {
+  title?:       string;
+  description?: string;
+  keywords?:    string;
+  ogImage?:     string;
+}
+const {
+  title       = 'Дизайнер интерьеров Светлана Рыбакова',
+  description = 'Комплексное проектирование частных и коммерческих интерьеров — от разработки концепции до реализации.',
+  keywords    = 'дизайнер интерьеров Москва, дизайн-проект, интерьер квартиры',
+  ogImage     = '',
+} = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"          content="width=device-width, initial-scale=1.0" />
+  <meta name="format-detection"  content="telephone=no" />
+  <meta name="description"       content={description} />
+  <meta name="keywords"          content={keywords} />
+  <meta property="og:title"      content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type"       content="website" />
+  {ogImage && <meta property="og:image" content={ogImage} />}
+  <title>{title}</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/src/styles/global.css" />
+</head>
+<body>
+  <slot />
+
+  <!-- Floating WhatsApp -->
+  <a class="wa-btn" href="https://wa.me/79164953751" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+      <path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.549 4.103 1.508 5.836L.057 23.882l6.196-1.425A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.81 9.81 0 0 1-5.001-1.366l-.359-.213-3.678.845.877-3.566-.234-.371A9.786 9.786 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
+    </svg>
+  </a>
+
+  <script>
+    // Scroll reveal
+    const io = new IntersectionObserver(
+      es => es.forEach(e => e.isIntersecting && e.target.classList.add('visible')),
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll('.reveal').forEach((el, i) => {
+      (el as HTMLElement).style.transitionDelay = `${i * 0.055}s`;
+      io.observe(el);
+    });
+
+    // Sticky header
+    const hdr = document.getElementById('site-header');
+    if (hdr) {
+      window.addEventListener('scroll', () =>
+        hdr.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
+    }
+
+    // Burger
+    const burger  = document.getElementById('burger');
+    const navMenu = document.getElementById('nav-menu');
+    burger?.addEventListener('click', () => {
+      const open = navMenu?.classList.toggle('open');
+      burger.setAttribute('aria-expanded', String(!!open));
+    });
+    navMenu?.querySelectorAll('a').forEach(a =>
+      a.addEventListener('click', () => navMenu.classList.remove('open')));
+  </script>
+
+  <style>
+    .wa-btn {
+      position:fixed; bottom:2rem; right:2rem; z-index:999;
+      width:54px; height:54px; background:#25d366; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      color:#fff; box-shadow:0 6px 24px rgba(0,0,0,.2);
+      transition:transform .3s ease;
+    }
+    .wa-btn:hover { transform:scale(1.1); }
+  </style>
+</body>
+</html>

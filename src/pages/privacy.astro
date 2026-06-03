@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header     from '../components/Header.astro';
+---
+<BaseLayout title="Политика конфиденциальности — Рыбакова С.И.">
+  <Header />
+  <main class="privacy-page container">
+    <a class="back" href="/">← На главную</a>
+    <h1>Политика конфиденциальности</h1>
+    <p>Настоящая Политика регулирует порядок обработки персональных данных посетителей сайта <strong>rybakovasi.ru</strong>.</p>
+    <h2>1. Сбор информации</h2>
+    <p>Данные собираются только при добровольном предоставлении через формы и мессенджеры.</p>
+    <h2>2. Использование</h2>
+    <p>Исключительно для ответа на запросы, согласования договоров и улучшения сервиса.</p>
+    <h2>3. Защита</h2>
+    <p>Принимаются все необходимые технические и организационные меры защиты.</p>
+    <h2>4. Cookie</h2>
+    <p>Сайт использует обязательные cookie. Продолжение использования означает согласие.</p>
+    <h2>5. Третьи лица</h2>
+    <p>Данные не передаются третьим лицам без согласия пользователя, кроме случаев, предусмотренных законодательством РФ.</p>
+    <h2>6. Контакты</h2>
+    <p>По вопросам: <a href="mailto:dzsi@mail.ru">dzsi@mail.ru</a></p>
+  </main>
+</BaseLayout>
+
+<style>
+  .privacy-page { padding-top:8rem; padding-bottom:5rem; max-width:760px; }
+  .back { display:inline-block; margin-bottom:2.5rem; font-size:.75rem; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); transition:opacity .25s; }
+  .back:hover { opacity:.7; }
+  h1 { font-family:var(--ff-display); font-weight:300; font-size:clamp(1.8rem,4vw,2.8rem); margin-bottom:2rem; }
+  h2 { font-family:var(--ff-display); font-weight:400; font-size:1.2rem; margin:2.5rem 0 .6rem; }
+  p  { color:var(--mid); font-size:1rem; line-height:1.8; margin-bottom:.6rem; }
+  a  { color:var(--accent); }
+</style>
